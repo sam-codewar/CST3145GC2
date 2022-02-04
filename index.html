@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body> 
+        <div id='app'>
+        <div v-for="course in course">
+            <div style=" border: 3px solid lightskyblue; padding: 3px; width: 180px; margin: 7px; float: left;">
+            <ul>
+               <li>Topic: {{course.topic}}</li>
+               <li>Location: {{course.location}}</li>
+               <li>Price: {{course.price}}</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+        <script>
+            let app = new Vue({
+                el: '#app',
+                data:{
+                    course: [],
+                },
+                created: function(){
+                    fetch('/lessons').then(
+                        function (response){
+                            response.json().then(
+                                function (json){
+                                    app.course = json;
+                                    console.log(json);
+                                });
+                        }
+                    )
+                }
+            })
+        </script>
+    </body>
+</html>
